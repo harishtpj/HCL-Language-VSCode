@@ -1,0 +1,26 @@
+{
+  "name": "hcl",
+  "displayName": "HCL",
+  "description": "The HCL Programming Language Support for VSCode ",
+  "version": "0.0.1",
+  "author": "Harish Kumar",
+  "engines": {
+    "vscode": "^1.77.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "hcl",
+      "aliases": ["HCL Programming Language", "hcl"],
+      "extensions": [".hcl"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "hcl",
+      "scopeName": "source.hcl",
+      "path": "./syntaxes/hcl.tmLanguage.json"
+    }]
+  }
+}

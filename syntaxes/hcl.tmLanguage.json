@@ -1,0 +1,152 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "HCL Programming Language",
+	"patterns": [
+		{
+			"include": "#comments"
+		},
+		{
+			"include": "#keywords"
+		},
+		{
+			"include": "#statements"
+		},
+		{
+			"include": "#callables"
+		},
+		{
+			"include": "#ident"
+		},
+		{
+			"include": "#strings"
+		},
+		{
+			"include": "#digits"
+		}
+	],
+	"repository": {
+		"keywords": {
+			"patterns": [
+				{
+					"name": "keyword.control.hcl",
+					"match": "\\b(if|else|while|for|loop|break|return|and|or)\\b"
+				},
+				{
+					"name": "constant.language.null.hcl",
+					"match": "\\b(null)\\b"
+				},
+				{
+					"name": "constant.language.boolean.hcl",
+					"match": "\\b(true|false)\\b"
+				},
+				{
+					"name": "support.function.builtin.hcl",
+					"match": "\\b(print|println)\\b"
+				},
+				{
+					"name": "variable.language.self.hcl",
+					"match": "\\b(self)\\b"
+				},
+				{
+					"name": "variable.language.super.hcl",
+					"match": "\\b(super)\\b"
+				}
+			]
+		},
+		"statements": {
+			"patterns": [
+				{
+					"match": "\\b(let)\\s+([A-Za-z_][A-Za-z0-9_]*)\\b",
+					"captures": {
+						"1": {
+							"name": "storage.type.hcl"
+						},
+						"2": {
+							"name": "support.variable.hcl"
+						}
+					}
+				},
+				{
+					"match": "\\b(fun)\\s+([A-Za-z_][A-Za-z0-9_]*)\\s*\\(([A-Za-z0-9,\\s]*)\\)",
+					"captures": {
+						"1": {
+							"name":"storage.type.function.hcl"
+						},
+						"2": {
+							"name":"entity.name.function.hcl"
+						},
+						"3": {
+							"patterns": [
+								{
+									"match": "\\b[A-Za-z_][A-Za-z0-9_]*\\b",
+									"name": "variable.parameter.hcl"
+								}
+							]
+						}
+					}
+				},
+				{
+					"match": "\\b(class)\\s+([A-Za-z_][A-Za-z0-9_]*)(?:\\s*(:)\\s*([A-Za-z_][A-Za-z0-9_]*))?\\b",
+					"captures": {
+						"1": {
+							"name": "storage.type.class.hcl"
+						},
+						"2": {
+							"name": "entity.name.type.class.hcl"
+						},
+						"3": {
+							"name": "storage.modifier.hcl"
+						},
+						"4": {
+							"name": "entity.name.type.class.hcl"
+						}
+					}
+				}
+			]
+		},
+		"callables": {
+			"patterns": [
+				{
+					"match": "([A-Za-z_][A-Za-z0-9_]*)\\(",
+					"name": "support.function.hcl"
+				}
+			]
+		},
+		"strings": {
+			"name": "string.quoted.double.hcl",
+			"begin": "\"",
+			"end": "\"",
+			"patterns": []
+		},
+		"digits": {
+			"patterns": [
+				{
+					"name": "constant.numeric.hcl",
+					"match": "\\b[0-9]+(?:.[0-9]+)?\\b"
+				}
+			]
+		},
+		"ident": {
+			"patterns": [
+				{
+					"name": "variable.other.readwrite.hcl",
+					"match": "\\b[A-Za-z_][A-Za-z0-9_]*\\b"
+				}
+			]
+		},
+		"comments": {
+			"patterns": [
+				{
+				  "match": "#.*$",
+				  "name": "comment.line.hcl"
+				},
+				{
+				  "begin": "#\\[",
+				  "end": "\\]",
+				  "name": "comment.block.multiline.hcl"
+				}
+			]
+		}
+	},
+	"scopeName": "source.hcl"
+}
